@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dot
+package slice
 
 import "strings"
 
