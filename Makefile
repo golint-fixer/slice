@@ -12,9 +12,6 @@ test:
 	test -z "`golint ./... | grep -v ffjson | tee /dev/stderr`"
 	go vet ./...
 
-test-integration:
-	go test -v ./jws/services -integration
-
 benchmark:
 	go test -bench . -benchmem -run=^a ./... | grep "Benchmark" > bench_result.txt
 

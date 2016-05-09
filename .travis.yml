@@ -20,4 +20,3 @@ before_script:
 script:
   - go get -v -t ./...
   - make test
-  - make test-integration
