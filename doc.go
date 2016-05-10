@@ -14,5 +14,39 @@
  * limitations under the License.
  */
 
-// Package slice provides operations to work with slices.
+/*
+Package slice provides operations to work with slices.
+
+String
+
+A String is a named type of slice of strings and provides some useful methods as:
+
+	- Equal to search two slices for equality;
+	- Except get the difference between two slices;
+	- Exists to determine whether specified string exists on slice;
+	- ExistsAll to determine whether all specified strings exists on slice;
+	- ExistsAny to determine whether any of specified strings exists on slice;
+	- IndexOf to determine index of specified string;
+	- TrueForAll to test whether every element of slice matches the conditions
+	specified by the predicate function;
+	- Where to filter elements from a string slice.
+
+NTypes
+
+NTypes provides named type of slice every number type. Supports the following types:
+float32, float64, int, int8, int16, int32, int64, uint, uint8, uint16, uint32, uint64.
+Provides the following methods:
+
+	- Average to calculate the average value of elements from slice;
+	- Equal to search two slices for equality;
+	- Except get the difference between two slices;
+	- Exists to determine whether specified string exists on slice;
+	- ExistsAll to determine whether all specified numbers exists on slice;
+	- ExistsAny to determine whether any of specified numbers exists on slice;
+	- IndexOf to determine index of specified number;
+	- Sum to calculate the sum of all elements from slice;
+	- TrueForAll to test whether every element of slice matches the conditions
+	specified by the predicate function;
+	- Where to filter elements from a number slice.
+*/
 package slice
