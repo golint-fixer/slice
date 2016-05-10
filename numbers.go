@@ -14,6 +14,21 @@ type PredicateNumberTypeFunc func(NumberType) bool
 // A NNumberType represents a slice of NumberType.
 type NNumberType []NumberType
 
+// Average returns the average value from all elements of current slice.
+func (n NNumberType) Average() float64 {
+	if n == nil || len(n) == 0 {
+		return 0
+	}
+
+	var result float64
+	for _, v := range n {
+		result += float64(v)
+	}
+
+	result /= float64(len(n))
+	return result
+}
+
 // Equal returns true whether all elements of specified slice match the ones from current
 // slice.
 func (n NNumberType) Equal(other []NumberType) bool {
@@ -34,6 +49,20 @@ func (n NNumberType) Equal(other []NumberType) bool {
 	}
 
 	return true
+}
+
+// Except returns the difference of two slices. Any element specified will be ignored
+// from current slice to the returned one.
+func (n NNumberType) Except(a ...NumberType) NNumberType {
+	var result NNumberType
+	aBox := NNumberType(a)
+	for _, v := range n {
+		if !aBox.Exists(v) {
+			result = append(result, v)
+		}
+	}
+
+	return result
 }
 
 // Exists determines whether specified NumberType exists into current slice.
@@ -108,4 +137,16 @@ func (n NNumberType) TrueForAny(pred PredicateNumberTypeFunc) bool {
 	}
 
 	return false
+}
+
+// Where filters the elements from current slice and return them on new slice.
+func (n NNumberType) Where(pred PredicateNumberTypeFunc) NNumberType {
+	var result NNumberType
+	for _, v := range n {
+		if pred(v) {
+			result = append(result, v)
+		}
+	}
+
+	return result
 }

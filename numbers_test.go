@@ -21,17 +21,33 @@ import "testing"
 const (
 	SampleIntMissing = 45
 	SampleSum        = 7373
+	SampleAvg        = 368.65
 )
 
 var (
 	SampleIntArray = []int{
-		296, 112, 380, 243, 336, 376, 664, 556, 162, 173, 684, 503, 542, 215, 607, 2,
-		132, 539, 646, 205,
+		296, 112, 380, 243, 336,
+		376, 664, 556, 162, 173,
+		684, 503, 542, 215, 607,
+		2, 132, 539, 646, 205,
 	}
 	SampleIntMissingArray = []int{
-		762, 667, 711, 254, 549, 379, 385, 944, 481, 402,
+		762, 667, 711, 254, 549,
+		379, 385, 944, 481, 402,
+	}
+	SampleIntGT500 = []int{
+		664, 556, 684, 503, 542,
+		607, 539, 646,
 	}
 )
+
+func TestIntAverage(t *testing.T) {
+	sample := NInt(SampleIntArray)
+
+	if sample.Average() != SampleAvg {
+		t.Error("Unexpected value average from slice elements")
+	}
+}
 
 func TestIntEqual(t *testing.T) {
 	sample := NInt(SampleIntArray)
@@ -146,5 +162,19 @@ func TestIntTrueForAny(t *testing.T) {
 
 	if !sample.TrueForAny(hasEvenNumbers) {
 		t.Error("Should be found even numbers on specified sample")
+	}
+}
+
+func TestIntWhere(t *testing.T) {
+	sample := NInt(SampleIntArray)
+
+	fSample := sample.Where(func(a int) bool {
+		return a > 500
+	})
+	if len(fSample) != len(SampleIntGT500) {
+		t.Errorf("Unexpected filtered sample length: %d", len(fSample))
+	}
+	if !fSample.Equal(SampleIntGT500) {
+		t.Error("Unexpected elements from filtered sample")
 	}
 }
