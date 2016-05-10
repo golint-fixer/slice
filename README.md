@@ -54,7 +54,7 @@ var (
 avg := slice.NInt(SampleIntArray).Average()
 ```
 
-For reference browse [library documentation][doc].
+For reference and examples browse [library documentation][doc].
 
 ## Running tests
 
