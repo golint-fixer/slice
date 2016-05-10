@@ -2,8 +2,6 @@
 // Any changes will be lost if this file is regenerated.
 // see https://github.com/cheekybits/genny
 
-// +build generate
-
 package slice
 
 // A PredicateFloat32Func represents a function that defines a criteria and
@@ -109,8 +107,6 @@ func (n NFloat32) TrueForAny(pred PredicateFloat32Func) bool {
 	return false
 }
 
-// +build generate
-
 // A PredicateFloat64Func represents a function that defines a criteria and
 // determines whether specified float64 meets that criteria.
 type PredicateFloat64Func func(float64) bool
@@ -213,8 +209,6 @@ func (n NFloat64) TrueForAny(pred PredicateFloat64Func) bool {
 
 	return false
 }
-
-// +build generate
 
 // A PredicateIntFunc represents a function that defines a criteria and
 // determines whether specified int meets that criteria.
@@ -319,8 +313,6 @@ func (n NInt) TrueForAny(pred PredicateIntFunc) bool {
 	return false
 }
 
-// +build generate
-
 // A PredicateInt16Func represents a function that defines a criteria and
 // determines whether specified int16 meets that criteria.
 type PredicateInt16Func func(int16) bool
@@ -423,8 +415,6 @@ func (n NInt16) TrueForAny(pred PredicateInt16Func) bool {
 
 	return false
 }
-
-// +build generate
 
 // A PredicateInt32Func represents a function that defines a criteria and
 // determines whether specified int32 meets that criteria.
@@ -529,8 +519,6 @@ func (n NInt32) TrueForAny(pred PredicateInt32Func) bool {
 	return false
 }
 
-// +build generate
-
 // A PredicateInt64Func represents a function that defines a criteria and
 // determines whether specified int64 meets that criteria.
 type PredicateInt64Func func(int64) bool
@@ -633,8 +621,6 @@ func (n NInt64) TrueForAny(pred PredicateInt64Func) bool {
 
 	return false
 }
-
-// +build generate
 
 // A PredicateInt8Func represents a function that defines a criteria and
 // determines whether specified int8 meets that criteria.
@@ -739,8 +725,6 @@ func (n NInt8) TrueForAny(pred PredicateInt8Func) bool {
 	return false
 }
 
-// +build generate
-
 // A PredicateUintFunc represents a function that defines a criteria and
 // determines whether specified uint meets that criteria.
 type PredicateUintFunc func(uint) bool
@@ -843,8 +827,6 @@ func (n NUint) TrueForAny(pred PredicateUintFunc) bool {
 
 	return false
 }
-
-// +build generate
 
 // A PredicateUint16Func represents a function that defines a criteria and
 // determines whether specified uint16 meets that criteria.
@@ -949,8 +931,6 @@ func (n NUint16) TrueForAny(pred PredicateUint16Func) bool {
 	return false
 }
 
-// +build generate
-
 // A PredicateUint32Func represents a function that defines a criteria and
 // determines whether specified uint32 meets that criteria.
 type PredicateUint32Func func(uint32) bool
@@ -1054,8 +1034,6 @@ func (n NUint32) TrueForAny(pred PredicateUint32Func) bool {
 	return false
 }
 
-// +build generate
-
 // A PredicateUint64Func represents a function that defines a criteria and
 // determines whether specified uint64 meets that criteria.
 type PredicateUint64Func func(uint64) bool
@@ -1158,8 +1136,6 @@ func (n NUint64) TrueForAny(pred PredicateUint64Func) bool {
 
 	return false
 }
-
-// +build generate
 
 // A PredicateUint8Func represents a function that defines a criteria and
 // determines whether specified uint8 meets that criteria.

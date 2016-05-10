@@ -29,6 +29,8 @@ test-cover-html:
 
 generate:
 	go generate -tags generate `go list ./...`
+	sed -i -- 's#// +build generate##g' *_genny.go
+	gofmt -s -l -w *_genny.go | tee /dev/stderr
 
 list-imports:
 	go list -f {{.Imports}} ./...
