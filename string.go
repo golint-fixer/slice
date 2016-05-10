@@ -25,6 +25,42 @@ type String []string
 // determines whether specified string meets that criteria.
 type PredicateStringFunc func(string) bool
 
+// Equal returns true whether all elements of specified slice match the ones from current
+// slice.
+func (s String) Equal(other []string) bool {
+	if s == nil && other == nil {
+		return true
+	}
+	if s == nil || other == nil {
+		return false
+	}
+	if len(s) != len(other) {
+		return false
+	}
+
+	for i := 0; i < len(s); i++ {
+		if s[i] != other[i] {
+			return false
+		}
+	}
+
+	return true
+}
+
+// Except returns the difference of two slices. Any element specified will be ignored
+// from current slice to the returned one.
+func (s String) Except(str []string, ignoreCase bool) String {
+	var result String
+	strBox := String(str)
+	for _, v := range s {
+		if !strBox.Exists(v, ignoreCase) {
+			result = append(result, v)
+		}
+	}
+
+	return result
+}
+
 // IndexOf looks for specified string into current slice, and optionally ignores
 // letter casing.
 func (s String) IndexOf(str string, ignoreCase bool) int {
@@ -99,4 +135,16 @@ func (s String) TrueForAny(pred PredicateStringFunc) bool {
 	}
 
 	return false
+}
+
+// Where filters the elements from current slice and return them on new slice.
+func (s String) Where(pred PredicateStringFunc) String {
+	var result String
+	for _, v := range s {
+		if pred(v) {
+			result = append(result, v)
+		}
+	}
+
+	return result
 }

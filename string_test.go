@@ -48,7 +48,44 @@ var (
 		"sub", "sui", "sum", "super", "suus", "tam", "tamen", "trans", "tu",
 		"tum", "ubi", "uel", "uero",
 	}
+	SampleTextNoStopWords = []string{
+		"Lorem", "ipsum", "dolor", "sit", "amet,", "consectetur", "adipiscing",
+		"elit", "tortor", "justo", "dui", "iaculis", "molestie", "Integer",
+	}
+	SampleTextExcept = []string{"Sed"}
 )
+
+func TestStringEqual(t *testing.T) {
+	sample := String(SampleTextArray)
+	sample2 := make([]string, len(sample))
+	copy(sample2, sample)
+
+	if !sample.Equal(sample2) {
+		t.Error("Slices should be equal to each other")
+	}
+	if !String(sample2).Equal(sample) {
+		t.Error("Slices should be equal to each other")
+	}
+
+	sample2 = sample2[:len(sample2)-1]
+	if sample.Equal(sample2) {
+		t.Error("Slices should be different")
+	}
+}
+
+func TestStringExcept(t *testing.T) {
+	sample := String(SampleTextArray)
+
+	out := sample.Except(SampleTextNoStopWords, true)
+	if !out.Equal(SampleTextExcept) {
+		t.Error("Unexpected result from except operation")
+	}
+
+	out = sample.Except(SampleTextArray, false)
+	if len(out) != 0 {
+		t.Error("Except from all elements should result in a zero-length slice")
+	}
+}
 
 func TestStringIndexOf(t *testing.T) {
 	sample := String(SampleTextArray)
@@ -157,5 +194,27 @@ func TestStringTrueForAny(t *testing.T) {
 
 	if !sample.TrueForAny(hasStopWords) {
 		t.Error("Should be found stop words on specified sample")
+	}
+}
+
+func TestStringWhere(t *testing.T) {
+	sample := String(SampleTextArray)
+
+	fSample := sample.Where(func(s string) bool {
+		return !String(StopWords).Exists(s, true)
+	})
+	if len(fSample) != len(SampleTextNoStopWords) {
+		t.Errorf("Unexpected filtered sample length: %d", len(fSample))
+	}
+	if !fSample.Equal(SampleTextNoStopWords) {
+		t.Error("Unexpected elements from filtered sample")
+	}
+
+	fSample = sample.Where(func(string) bool {
+		return false
+	})
+	if len(fSample) != 0 {
+		t.Error("Rejecting all elements on where operation should result in a " +
+			"zero-length slice")
 	}
 }
