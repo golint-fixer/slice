@@ -39,6 +39,11 @@ var (
 		664, 556, 684, 503, 542,
 		607, 539, 646,
 	}
+	SampleIntExcept = []int{
+		296, 112, 380, 243, 336,
+		376, 162, 173, 215, 2,
+		132, 205,
+	}
 )
 
 func TestIntAverage(t *testing.T) {
@@ -67,25 +72,17 @@ func TestIntEqual(t *testing.T) {
 	}
 }
 
-func TestIntSum(t *testing.T) {
+func TestIntExcept(t *testing.T) {
 	sample := NInt(SampleIntArray)
 
-	if sample.Sum() != SampleSum {
-		t.Error("Unexpected value summing slice elements")
-	}
-}
-
-func TestIntIndexOf(t *testing.T) {
-	sample := NInt(SampleIntArray)
-
-	for i, item := range SampleIntArray {
-		if retIdx := sample.IndexOf(item); retIdx != i {
-			t.Errorf("Expected index '%d' but got '%d'", i, retIdx)
-		}
+	out := sample.Except(SampleIntGT500...)
+	if !out.Equal(SampleIntExcept) {
+		t.Error("Unexpected result from except operation")
 	}
 
-	if sample.IndexOf(SampleIntMissing) != -1 {
-		t.Errorf("The index of '%d' should be -1", SampleIntMissing)
+	out = sample.Except(SampleIntArray...)
+	if len(out) != 0 {
+		t.Error("Except from all elements should result in a zero-length slice")
 	}
 }
 
@@ -133,6 +130,28 @@ func TestIntExistsAny(t *testing.T) {
 	}
 }
 
+func TestIntIndexOf(t *testing.T) {
+	sample := NInt(SampleIntArray)
+
+	for i, item := range SampleIntArray {
+		if retIdx := sample.IndexOf(item); retIdx != i {
+			t.Errorf("Expected index '%d' but got '%d'", i, retIdx)
+		}
+	}
+
+	if sample.IndexOf(SampleIntMissing) != -1 {
+		t.Errorf("The index of '%d' should be -1", SampleIntMissing)
+	}
+}
+
+func TestIntSum(t *testing.T) {
+	sample := NInt(SampleIntArray)
+
+	if sample.Sum() != SampleSum {
+		t.Error("Unexpected value summing slice elements")
+	}
+}
+
 func TestIntTrueForAll(t *testing.T) {
 	sample := NInt(SampleIntArray)
 
@@ -176,5 +195,13 @@ func TestIntWhere(t *testing.T) {
 	}
 	if !fSample.Equal(SampleIntGT500) {
 		t.Error("Unexpected elements from filtered sample")
+	}
+
+	fSample = sample.Where(func(int) bool {
+		return false
+	})
+	if len(fSample) != 0 {
+		t.Error("Rejecting all elements on where operation should result in a " +
+			"zero-length slice")
 	}
 }
