@@ -28,7 +28,7 @@ test-cover-html:
 	rm -f coverage-all.out
 
 generate:
-	go generate `go list ./...`
+	go generate -tags generate `go list ./...`
 
 list-imports:
 	go list -f {{.Imports}} ./...
