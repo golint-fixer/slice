@@ -50,7 +50,7 @@ var (
 	}
 )
 
-func TestStringSliceIndexOf(t *testing.T) {
+func TestStringIndexOf(t *testing.T) {
 	sample := String(SampleTextArray)
 
 	for i, item := range SampleTextArray {
@@ -72,7 +72,7 @@ func TestStringSliceIndexOf(t *testing.T) {
 	}
 }
 
-func TestStringSliceExists(t *testing.T) {
+func TestStringExists(t *testing.T) {
 	sample := String(SampleTextArray)
 
 	for _, item := range SampleTextArray {
@@ -95,7 +95,7 @@ func TestStringSliceExists(t *testing.T) {
 	}
 }
 
-func TestStringSliceExistsAll(t *testing.T) {
+func TestStringExistsAll(t *testing.T) {
 	sample := String(SampleTextArray)
 	testSample := make([]string, 6)
 	copy(testSample, sample[2:8])
@@ -110,7 +110,7 @@ func TestStringSliceExistsAll(t *testing.T) {
 	}
 }
 
-func TestStringSliceExistsAny(t *testing.T) {
+func TestStringExistsAny(t *testing.T) {
 	sample := String(SampleTextArray)
 	testSample := make([]string, len(SampleTextMissingArray))
 	copy(testSample, SampleTextMissingArray)
@@ -125,7 +125,7 @@ func TestStringSliceExistsAny(t *testing.T) {
 	}
 }
 
-func TestStringSliceTrueForAll(t *testing.T) {
+func TestStringTrueForAll(t *testing.T) {
 	sample := String(SampleTextArray)
 
 	hasVowel := func(s string) bool {
@@ -147,7 +147,7 @@ func TestStringSliceTrueForAll(t *testing.T) {
 	}
 }
 
-func TestStringSliceTrueForAny(t *testing.T) {
+func TestStringTrueForAny(t *testing.T) {
 	sample := String(SampleTextArray)
 	stopWords := String(StopWords)
 
