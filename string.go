@@ -18,7 +18,7 @@ package slice
 
 import "strings"
 
-// A String represents a slice of strings.
+// A String represents a slice of string.
 type String []string
 
 // A PredicateStringFunc represents a function that defines a criteria and
@@ -66,7 +66,7 @@ func (s String) ExistsAll(str []string, ignoreCase bool) bool {
 }
 
 // ExistsAny determine whether any of specified strings exists into current
-// slice
+// slice.
 func (s String) ExistsAny(str []string, ignoreCase bool) bool {
 	for _, v := range str {
 		if s.IndexOf(v, ignoreCase) != -1 {
